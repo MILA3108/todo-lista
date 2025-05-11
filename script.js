@@ -1,50 +1,44 @@
-document.addEventListener("DOMContentLoaded", () => {
-  loadTasks();
-});
+const taskInput = document.getElementById("taskInput");
+const taskList = document.getElementById("taskList");
 
-function addTask() {
-  const input = document.getElementById("taskInput");
-  const task = input.value.trim();
-  if (task !== "") {
-    const tasks = getTasks();
-    tasks.push({ text: task, completed: false });
-    saveTasks(tasks);
-    input.value = "";
-    renderTasks();
-  }
+function loadTasks() {
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.forEach(task => createTaskElement(task));
 }
 
-function getTasks() {
-  const tasks = localStorage.getItem("tasks");
-  return tasks ? JSON.parse(tasks) : [];
-}
-
-function saveTasks(tasks) {
+function saveTasks() {
+  const tasks = Array.from(taskList.children).map(li => li.querySelector("span").textContent);
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-function renderTasks() {
-  const list = document.getElementById("taskList");
-  list.innerHTML = "";
-  const tasks = getTasks();
-  tasks.forEach((task, index) => {
-    const li = document.createElement("li");
-    li.textContent = task.text;
-    if (task.completed) {
-      li.classList.add("completed");
-    }
-    li.onclick = () => toggleTask(index);
-    list.appendChild(li);
-  });
+function createTaskElement(text) {
+  const li = document.createElement("li");
+
+  const span = document.createElement("span");
+  span.textContent = text;
+  span.onclick = () => {
+    span.classList.toggle("completed");
+  };
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "X";
+  deleteBtn.onclick = () => {
+    li.remove();
+    saveTasks();
+  };
+
+  li.appendChild(span);
+  li.appendChild(deleteBtn);
+  taskList.appendChild(li);
 }
 
-function toggleTask(index) {
-  const tasks = getTasks();
-  tasks[index].completed = !tasks[index].completed;
-  saveTasks(tasks);
-  renderTasks();
+function addTask() {
+  const text = taskInput.value.trim();
+  if (text !== "") {
+    createTaskElement(text);
+    saveTasks();
+    taskInput.value = "";
+  }
 }
 
-function loadTasks() {
-  renderTasks();
-}
+loadTasks();
