@@ -1,62 +1,63 @@
 body {
+  margin: 0;
+  padding: 0;
   font-family: Arial, sans-serif;
-  background-color: #f3e5f5;
-  color: #4a148c;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  background-image: url('background.jpg'); /* Ovo je tvoja slika */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .container {
-  background-color: #ede7f6;
+  max-width: 500px;
+  margin: 100px auto;
+  background: rgba(255, 255, 255, 0.9); /* providna bijela pozadina */
   padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
-input {
-  padding: 8px;
-  border: 1px solid #ba68c8;
+h1 {
+  text-align: center;
+  color: #6a1b9a; /* ljubičasta */
+}
+
+input[type="text"] {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ccc;
   border-radius: 5px;
 }
 
 button {
-  background-color: #ab47bc;
-  color: white;
+  padding: 10px 15px;
+  background-color: #6a1b9a; /* ljubičasta */
+  color: #fff;
   border: none;
-  padding: 8px 12px;
-  margin-left: 5px;
   border-radius: 5px;
   cursor: pointer;
 }
 
 ul {
-  margin-top: 20px;
+  list-style: none;
   padding: 0;
 }
 
 li {
-  list-style: none;
-  margin-bottom: 10px;
-  background-color: #d1c4e9;
   padding: 10px;
-  border-radius: 8px;
+  background: #f0f0f0;
+  margin-top: 10px;
+  border-radius: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-li.completed {
-  text-decoration: line-through;
-  opacity: 0.6;
-}
-
-li button {
-  background-color: #e57373;
-  border: none;
+li .delete {
+  background-color: #e53935;
   color: white;
   padding: 5px 10px;
-  border-radius: 5px;
+  border: none;
+  border-radius: 3px;
   cursor: pointer;
 }
