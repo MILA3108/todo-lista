@@ -92,3 +92,10 @@ li button {
 li button:hover {
   background-color: #E04848;
 }
+
+/* Precrtani (urađeni) zadatak */
+.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+  cursor: pointer;
+}
