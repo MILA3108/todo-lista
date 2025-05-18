@@ -1,21 +1,165 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="manifest" href="manifest.json" />
-  <title>To-Do Lista</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>To-Do Lista</title>
+<style>
+  body {
+    background-color: #9370DB;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    background-color: #6A5ACD;
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  }
+
+  .todo-list {
+    background-color: rgba(255, 255, 255, 0.15);
+    margin: 30px 0;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  button {
+    background-color: #6A5ACD;
+    border: none;
+    padding: 12px 25px;
+    color: white;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+  }
+
+  button:hover {
+    background-color: #483D8B;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    background-color: rgba(255,255,255,0.25);
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  li button {
+    background-color: #FF6B6B;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    box-shadow: none;
+  }
+
+  li button:hover {
+    background-color: #E04848;
+  }
+
+  .completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+    cursor: pointer;
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>Moja To-Do Lista</h1>
-    <input type="text" id="taskInput" placeholder="Unesi zadatak" />
-    <button onclick="addTask()">Dodaj</button>
-    <ul id="taskList"></ul>
-  </div>
+<header>Moja To-Do Lista</header>
+<div class="todo-list">
+  <input type="text" id="taskInput" placeholder="Unesi novi zadatak..." />
+  <button onclick="addTask()">Dodaj zadatak</button>
+  <ul id="taskList"></ul>
+</div>
 
-  <script src="script.js"></script>
+<script>
+  const taskInput = document.getElementById("taskInput");
+  const taskList = document.getElementById("taskList");
+
+  function loadTasks() {
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.forEach(task => createTaskElement(task.text, task.completed));
+  }
+
+  function saveTasks() {
+    const tasks = Array.from(taskList.children).map(li => {
+      return {
+        text: li.querySelector("span").textContent,
+        completed: li.querySelector("span").classList.contains("completed")
+      };
+    });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+
+  function createTaskElement(text, completed = false) {
+    const li = document.createElement("li");
+
+    const span = document.createElement("span");
+    span.textContent = text;
+    span.classList.toggle("completed", completed);
+    span.onclick = () => {
+      span.classList.toggle("completed");
+      saveTasks();
+    };
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "X";
+    deleteBtn.onclick = () => {
+      li.remove();
+      saveTasks();
+    };
+
+    li.appendChild(span);
+    li.appendChild(deleteBtn);
+    taskList.appendChild(li);
+  }
+
+  function addTask() {
+    const text = taskInput.value.trim();
+    if (text !== "") {
+      createTaskElement(text);
+      saveTasks();
+      taskInput.value = "";
+    }
+  }
+
+  loadTasks();
+</script>
 </body>
 </html>
-
