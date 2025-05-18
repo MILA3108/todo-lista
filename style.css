@@ -1,61 +1,94 @@
+/* Pozadina cijele stranice */
 body {
-  background-color: #9b59b6; /* ljubičasta boja */
-  color: white; /* bijela boja teksta za dobar kontrast */
-  font-family: Arial, sans-serif; /* opcionalno, za bolji izgled fonta */
-  margin: 0; /* uklanja default margine */
-  padding: 0; /* uklanja default padding */
+  background-color: #9370DB;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* Zaglavlje */
+header {
+  background-color: #6A5ACD;
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
 
-.container {
-  background-color: #ede7f6;
+/* Glavni sadržaj todo liste */
+.todo-list {
+  background-color: rgba(255, 255, 255, 0.15);
+  margin: 30px 0;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-input {
-  padding: 8px;
-  border: 1px solid #ba68c8;
-  border-radius: 5px;
-}
-
+/* Dugmad */
 button {
-  background-color: #ab47bc;
-  color: white;
+  background-color: #6A5ACD;
   border: none;
-  padding: 8px 12px;
-  margin-left: 5px;
-  border-radius: 5px;
+  padding: 12px 25px;
+  color: white;
+  font-size: 1rem;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
 }
 
+button:hover {
+  background-color: #483D8B; /* tamnija ljubičasta na hover */
+}
+
+/* Polja za unos */
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+/* Stil za listu zadataka */
 ul {
-  margin-top: 20px;
+  list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 li {
-  list-style: none;
+  background-color: rgba(255,255,255,0.25);
   margin-bottom: 10px;
-  background-color: #d1c4e9;
-  padding: 10px;
+  padding: 10px 15px;
   border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-li.completed {
-  text-decoration: line-through;
-  opacity: 0.6;
+/* Stil za dugme za brisanje zadatka */
+li button {
+  background-color: #FF6B6B; /* crveno dugme za brisanje */
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  box-shadow: none;
 }
 
-li button {
-  background-color: #e57373;
-  border: none;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
+li button:hover {
+  background-color: #E04848;
 }
