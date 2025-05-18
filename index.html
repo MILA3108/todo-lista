@@ -1,36 +1,21 @@
 <!DOCTYPE html>
-<html lang="hr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="manifest.json" />
   <title>To-Do Lista</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#6200EE" />
 </head>
 <body>
   <div class="container">
-    <h1>To-Do Lista</h1>
-    <div class="input-section">
-      <input type="text" id="taskInput" placeholder="Unesi zadatak..." />
-      <button onclick="addTask()">Dodaj</button>
-    </div>
+    <h1>Moja To-Do Lista</h1>
+    <input type="text" id="taskInput" placeholder="Unesi zadatak" />
+    <button onclick="addTask()">Dodaj</button>
     <ul id="taskList"></ul>
   </div>
 
   <script src="script.js"></script>
-  <script>
-    // Registracija service workera
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(function(registration) {
-          console.log('Service Worker registriran:', registration);
-        })
-        .catch(function(error) {
-          console.log('Service Worker nije registriran:', error);
-        });
-    }
-  </script>
 </body>
 </html>
 
