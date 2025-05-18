@@ -3,21 +3,28 @@ const taskList = document.getElementById("taskList");
 
 function loadTasks() {
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  tasks.forEach(task => createTaskElement(task));
+  tasks.forEach(task => createTaskElement(task.text, task.completed));
 }
 
 function saveTasks() {
-  const tasks = Array.from(taskList.children).map(li => li.querySelector("span").textContent);
+  const tasks = Array.from(taskList.children).map(li => {
+    return {
+      text: li.querySelector("span").textContent,
+      completed: li.querySelector("span").classList.contains("completed")
+    };
+  });
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-function createTaskElement(text) {
+function createTaskElement(text, completed = false) {
   const li = document.createElement("li");
 
   const span = document.createElement("span");
   span.textContent = text;
+  span.classList.toggle("completed", completed);
   span.onclick = () => {
     span.classList.toggle("completed");
+    saveTasks();
   };
 
   const deleteBtn = document.createElement("button");
