@@ -1,12 +1,11 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f3e5f5;
-  color: #4a148c;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  background-color: #9b59b6; /* ljubičasta boja */
+  color: white; /* bijela boja teksta za dobar kontrast */
+  font-family: Arial, sans-serif; /* opcionalno, za bolji izgled fonta */
+  margin: 0; /* uklanja default margine */
+  padding: 0; /* uklanja default padding */
 }
+
 
 .container {
   background-color: #ede7f6;
